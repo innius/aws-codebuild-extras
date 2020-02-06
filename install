@@ -45,11 +45,3 @@ echo "==> CODEBUILD_GIT_TAG = $CODEBUILD_GIT_TAG"
 echo "==> CODEBUILD_GIT_MOST_RECENT_TAG = $CODEBUILD_GIT_MOST_RECENT_TAG"
 echo "==> CODEBUILD_PROJECT = $CODEBUILD_PROJECT"
 echo "==> CODEBUILD_PULL_REQUEST = $CODEBUILD_PULL_REQUEST"
-
-function sonar_scanner {
- if expr "CODEBUILD_GIT_BRANCH" : "master" >/dev/null; then
-  sonar-scanner -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.branch.name=$CODEBUILD_GIT_BRANCH -Dsonar.scm.revision=$CODEBUILD_GIT_COMMIT;
- else 
-  sonar-scanner -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.branch.name=$CODEBUILD_GIT_BRANCH -Dsonar.scm.revision=$CODEBUILD_GIT_COMMIT -Dsonar.branch.target=master;
- fi              
-}
